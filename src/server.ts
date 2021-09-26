@@ -1,3 +1,5 @@
+import 'dotenv/config'
+import './database'
 import express, { Request, Response, NextFunction } from 'express'
 import morgan from 'morgan'
 import { router } from './routes'
