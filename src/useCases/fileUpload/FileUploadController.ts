@@ -4,7 +4,7 @@ import { FileUploadUsecase } from './FileUploadUseCase'
 
 export class FileUploadController {
   async handle(req: Request, res: Response): Promise<Response> {
-    const { originalname: name, size, filename: key } = req.file
+    const { originalname: name, size, key } = req.file
 
     const fileUploadUseCase = container.resolve(FileUploadUsecase)
 
