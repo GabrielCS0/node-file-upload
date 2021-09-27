@@ -1,9 +1,10 @@
+import 'reflect-metadata'
 import 'dotenv/config'
+import './container'
 import './database'
 import express, { Request, Response, NextFunction } from 'express'
 import morgan from 'morgan'
 import { router } from './routes'
-import { AppError } from './errors/AppError'
 
 const app = express()
 
@@ -13,8 +14,8 @@ app.use(morgan('dev'))
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 app.use((err: Error, req: Request, res: Response, _: NextFunction) => {
-  if (err instanceof AppError) {
-    return res.status(err.statusCode).json({
+  if (err instanceof Error) {
+    return res.status(400).json({
       status: 'error',
       message: err.message
     })

@@ -18,6 +18,7 @@
 	],
 	"rules": {
 		"prettier/prettier": "error",
-		"space-before-function-paren": "off"
+		"space-before-function-paren": "off",
+		"no-useless-constructor": "off"
 	}
 }
