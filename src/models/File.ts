@@ -1,4 +1,7 @@
 import { Schema, Document, model } from 'mongoose'
+import { unlink } from 'fs'
+import { resolve } from 'path'
+import { promisify } from 'util'
 
 interface IFile {
   name: string
@@ -23,6 +26,7 @@ const FileSchema = new Schema<IFile>(
     key: {
       type: String,
       trim: true,
+      unique: true,
       required: true
     },
     url: {
@@ -35,6 +39,19 @@ const FileSchema = new Schema<IFile>(
 
 FileSchema.pre('save', function () {
   if (!this.url) this.url = `${process.env.APP_URL}/files/${this.key}`
+})
+
+FileSchema.pre('findOneAndDelete', function () {
+  const path = resolve(
+    __dirname,
+    '..',
+    '..',
+    'tmp',
+    'uploads',
+    this.getFilter().key
+  )
+
+  if (process.env.STORAGE_TYPE === 'local') promisify(unlink)(path)
 })
 
 export default model<FileDocument>('File', FileSchema)
