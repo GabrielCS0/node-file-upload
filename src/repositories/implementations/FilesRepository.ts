@@ -14,4 +14,9 @@ export class FilesRepository implements IFilesRepository {
 
     return file
   }
+
+  async findAll(): Promise<FileDocument[]> {
+    const files = await File.find()
+    return files
+  }
 }
