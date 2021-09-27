@@ -1,14 +1,14 @@
 import { Request, Response } from 'express'
 import { container } from 'tsyringe'
-import { FileUploadUsecase } from './FileUploadUseCase'
+import { FileUploadUseCase } from './FileUploadUseCase'
 
 export class FileUploadController {
   async handle(req: Request, res: Response): Promise<Response> {
     const { originalname: name, size, key } = req.file
 
-    const fileUploadUseCase = container.resolve(FileUploadUsecase)
+    const fileUploadUseCase = container.resolve(FileUploadUseCase)
 
-    const file = await fileUploadUseCase.execute({ name, size, key, url: 'x' })
+    const file = await fileUploadUseCase.execute({ name, size, key })
 
     return res.status(201).json(file)
   }

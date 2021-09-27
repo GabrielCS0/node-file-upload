@@ -3,5 +3,6 @@ declare namespace NodeJS {
     PORT?: number
     MONGO_URL: string
     STORAGE_TYPE: string
+    APP_URL: string
   }
 }

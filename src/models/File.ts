@@ -27,11 +27,14 @@ const FileSchema = new Schema<IFile>(
     },
     url: {
       type: String,
-      trim: true,
-      required: true
+      trim: true
     }
   },
   { timestamps: true }
 )
+
+FileSchema.pre('save', function () {
+  if (!this.url) this.url = `${process.env.APP_URL}/files/${this.key}`
+})
 
 export default model<FileDocument>('File', FileSchema)

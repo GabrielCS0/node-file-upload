@@ -4,7 +4,7 @@ import { IFilesRepository } from '../../repositories/IFilesRepository'
 import { inject, injectable } from 'tsyringe'
 
 @injectable()
-export class FileUploadUsecase {
+export class FileUploadUseCase {
   constructor(
     @inject('FilesRepository')
     private filesRepository: IFilesRepository
