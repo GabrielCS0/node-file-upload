@@ -4,5 +4,6 @@ declare namespace NodeJS {
     MONGO_URL: string
     STORAGE_TYPE: string
     APP_URL: string
+    NODE_ENV: string
   }
 }

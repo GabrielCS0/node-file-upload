@@ -4,10 +4,13 @@ import crypto from 'crypto'
 import { Request } from 'express-serve-static-core'
 import { Callback } from 'mongoose'
 
+export const uploadFolder =
+  process.env.NODE_ENV === 'test' ? 'uploadTests' : 'uploads'
+
 const storageTypes = {
   local: multer.diskStorage({
     destination: (_, file: Express.Multer.File, cb: Callback) => {
-      cb(null, path.resolve(__dirname, '..', '..', 'tmp', 'uploads'))
+      cb(null, path.resolve(__dirname, '..', '..', 'tmp', uploadFolder))
     },
     filename: (_: Request, file: Express.Multer.File, cb: Callback) => {
       crypto.randomBytes(16, (err, hash) => {
@@ -22,7 +25,7 @@ const storageTypes = {
 
 export default {
   multerConfig: {
-    dest: path.resolve(__dirname, '..', '..', 'tmp', 'uploads'),
+    dest: path.resolve(__dirname, '..', '..', 'tmp', uploadFolder),
     storage: storageTypes[process.env.STORAGE_TYPE],
     limits: {
       fileSize: 2 * 1024 * 1024 // 2MB

@@ -2,6 +2,7 @@ import { Schema, Document, model } from 'mongoose'
 import { unlink } from 'fs'
 import { resolve } from 'path'
 import { promisify } from 'util'
+import { uploadFolder } from '../config/multer'
 
 interface IFile {
   name: string
@@ -47,7 +48,7 @@ FileSchema.pre('findOneAndDelete', function () {
     '..',
     '..',
     'tmp',
-    'uploads',
+    uploadFolder,
     this.getFilter().key
   )
 
