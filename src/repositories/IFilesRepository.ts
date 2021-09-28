@@ -5,4 +5,5 @@ export interface IFilesRepository {
   create(data: IFileUploadDTO): Promise<FileDocument>
   findAll(): Promise<FileDocument[]>
   deleteByKey(key: string): Promise<void>
+  findByKey(key: string): Promise<FileDocument>
 }

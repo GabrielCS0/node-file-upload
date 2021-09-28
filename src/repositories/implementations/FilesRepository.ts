@@ -23,4 +23,9 @@ export class FilesRepository implements IFilesRepository {
   async deleteByKey(key: string): Promise<void> {
     await File.findOneAndDelete({ key })
   }
+
+  async findByKey(key: string): Promise<FileDocument> {
+    const file = await File.findOne({ key })
+    return file
+  }
 }
